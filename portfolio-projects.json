@@ -1,0 +1,150 @@
+[
+  {
+    "slug": "kombucha",
+    "title": "TEAZEN Kombucha",
+    "ko": "티젠 콤부차",
+    "node": "14:110",
+    "category": "Promotion",
+    "ratio": 1,
+    "summary": "취향을 고르고, 혜택을 발견하는 콤부차 프로모션.",
+    "description": "골라담기, 취향 테스트, 랜덤 쿠폰과 보틀 증정 혜택을 하나의 흐름으로 구성한 이벤트 디자인입니다. 오렌지 포인트 컬러와 제품 이미지를 중심으로 혜택의 위계를 정리했습니다.",
+    "focus": "혜택의 위계 · 제품 중심 비주얼 · 참여 흐름",
+    "gallery": [
+      [
+        3,
+        "제품 구성"
+      ],
+      [
+        4,
+        "취향 테스트"
+      ],
+      [
+        6,
+        "랜덤 쿠폰 비주얼"
+      ],
+      [
+        5,
+        "보틀 증정 구성"
+      ]
+    ],
+    "fullImage": "/assets/portfolio/full/kombucha.png",
+    "imageWidth": 1070,
+    "imageHeight": 3318
+  },
+  {
+    "slug": "laka",
+    "title": "laka",
+    "ko": "라카",
+    "node": "14:415",
+    "category": "Detail Page",
+    "ratio": 2,
+    "summary": "컬러와 윤기를 섬세하게 전하는 뷰티 상세 디자인.",
+    "description": "Popping Balloon Tint의 컬러, 텍스처와 제품 특성을 순서대로 소개합니다. 모델 컷과 제품 클로즈업, 컬러 차트를 교차 배치해 브랜드의 분위기와 제품 정보를 함께 전달했습니다.",
+    "focus": "컬러 스토리 · 텍스처 · 제품 정보",
+    "gallery": [
+      [
+        2,
+        "모델 이미지 01"
+      ],
+      [
+        3,
+        "모델 이미지 02"
+      ],
+      [
+        4,
+        "Volume & Moisture"
+      ],
+      [
+        5,
+        "Clear & Bloom"
+      ]
+    ],
+    "fullImage": "/assets/portfolio/full/laka.png",
+    "imageWidth": 1200,
+    "imageHeight": 14048
+  },
+  {
+    "slug": "kamill",
+    "title": "Kamill",
+    "ko": "카밀",
+    "node": "14:915",
+    "category": "Detail Page",
+    "ratio": 3,
+    "summary": "자연에서 시작되는 핸드케어의 시각적 이야기.",
+    "description": "캐모마일과 식물성 원료의 이미지를 바탕으로 카밀의 핸드케어 제품을 소개합니다. 차분한 뉴트럴 톤과 넓은 여백으로 브랜드 이야기, 제품군, 선물 구성을 연결했습니다.",
+    "focus": "자연의 색 · 브랜드 스토리 · 제품 탐색",
+    "gallery": [
+      [
+        2,
+        "브랜드 비주얼"
+      ],
+      [
+        3,
+        "제품 이야기"
+      ],
+      [
+        4,
+        "제품 라인업"
+      ]
+    ],
+    "fullImage": "/assets/portfolio/full/kamill.png",
+    "imageWidth": 1200,
+    "imageHeight": 29446
+  },
+  {
+    "slug": "tous",
+    "title": "TOUS les JOURS",
+    "ko": "뚜레쥬르",
+    "node": "20:1811",
+    "category": "Web Design",
+    "ratio": 1,
+    "summary": "갓 구운 빵처럼 따뜻한 일상을 담은 베이커리 웹 디자인.",
+    "description": "메뉴, 계절 선물, Daily Picks, 이벤트, 브랜드 스토리와 매장 안내로 이어지는 웹 화면입니다. 빵과 커피의 사진, 여유 있는 타이포그래피로 일상의 따뜻한 순간을 표현했습니다.",
+    "focus": "메뉴 탐색 · 시즌 콘텐츠 · 브랜드 경험",
+    "gallery": [
+      [
+        1,
+        "Hero 이미지 레이어 01"
+      ],
+      [
+        2,
+        "Hero 이미지 레이어 02"
+      ],
+      [
+        3,
+        "Hero 이미지 레이어 03"
+      ]
+    ],
+    "fullImage": "/assets/portfolio/full/tous.png",
+    "imageWidth": 1920,
+    "imageHeight": 10268
+  },
+  {
+    "slug": "kvelo",
+    "title": "K VELO",
+    "ko": "케이벨로",
+    "node": "20:2871",
+    "category": "Web Design",
+    "ratio": 2,
+    "summary": "자전거와 여행, 새로운 경험으로 이어지는 웹 디자인.",
+    "description": "라이딩 여행과 자전거 행사를 탐색하고 라이더의 이야기를 만나는 화면입니다. 넓은 라이딩 사진과 경쾌한 포인트 컬러를 사용해 여행 콘텐츠의 활기와 탐색 흐름을 담았습니다.",
+    "focus": "여행 탐색 · 행사 정보 · 라이더 이야기",
+    "gallery": [
+      [
+        2,
+        "라이딩 여행 01"
+      ],
+      [
+        3,
+        "라이딩 여행 02"
+      ],
+      [
+        4,
+        "라이딩 여행 03"
+      ]
+    ],
+    "fullImage": "/assets/portfolio/full/kvelo.png",
+    "imageWidth": 1920,
+    "imageHeight": 6035
+  }
+]

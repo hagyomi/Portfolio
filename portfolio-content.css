@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+/* Content-only additions to the existing portfolio/reference layout. */
+/* Keep the home panels still and let individual cards receive pointer input. */
+body:not(.is-busy) .container-menu .menu-column:hover .menu-page-wrap {
+  transform: none;
+}
+body .barba-container.container-menu .menu-page-wrap a:is([data-project], [data-website]) {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto !important;
+}
+/* The miniature pages disable pointer input on descendants by default. */
+body .barba-container.container-menu .menu-page-wrap a:is([data-project], [data-website]) * {
+  pointer-events: auto !important;
+}
+a[data-project] .image-wrap,
+a[data-website] .portfolio-website-thumbnail { overflow: hidden; }
+a[data-project] .image-wrap > *,
+a[data-website] .portfolio-website-thumbnail img {
+  transition: transform 0.35s ease;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  body:not(.is-busy) a[data-project]:hover .image-wrap > *,
+  body:not(.is-busy) a[data-website]:hover .portfolio-website-thumbnail img {
+    transform: scale(1.05);
+  }
+}
+.portfolio-event-title { display: block; font-size: clamp(1.5rem, 9vw, 9rem); white-space: nowrap; }
+.portfolio-photoshop-section { padding-block: var(--pf-space-12) var(--pf-section-space); }
+.portfolio-photoshop-section h2 { font-family: var(--pf-font-display); font-weight: var(--pf-font-weight-medium); font-size: clamp(1.125rem, 6vw, 6rem); line-height: 1.15; letter-spacing: var(--pf-tracking-section); }
+.portfolio-wordmark {
+  display: block;
+  font-family: var(--pf-font-display);
+  font-size: 16vw;
+  font-weight: var(--pf-font-weight-medium);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+.portfolio-profile-image { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+.portfolio-webpage-image { display: block; width: 100%; height: auto; }
+.portfolio-website-list { display: grid; grid-template-columns: 1fr; gap: var(--pf-grid-gutter); padding: var(--pf-page-gutter); }
+.portfolio-website-card { display: block; color: var(--pf-color-heading); }
+.portfolio-website-thumbnail { aspect-ratio: 2.25; overflow: hidden; background: var(--pf-white); }
+.portfolio-website-thumbnail img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.portfolio-website-caption { display: flex; justify-content: space-between; gap: 1rem; padding-block: 0.75rem; font-size: var(--pf-text-body); line-height: var(--pf-leading-caption); }
+@media (min-width: 48rem) {
+  .container-atlason .portfolio-website-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.atlason-top:has(.portfolio-webpage-image) { background: var(--pf-white); margin-bottom: 0; }
+.portfolio-background { width: 100%; height: 100%; object-fit: cover; }
+.portfolio-cover { display: block; width: 100%; height: 100%; object-fit: cover; }
+.portfolio-cover-kombucha { position: relative; overflow: hidden; background: #f6e7c8; }
+.portfolio-cover-background { width: 100%; height: 100%; object-fit: cover; }
+.portfolio-cover-kombucha .portfolio-cover-product { position: absolute; width: 74%; height: 90%; object-fit: contain; inset: 5% 13%; }
+.portfolio-card-meta { display: block; margin-top: 0.5em; font-size: 0.78em; color: var(--pf-color-text-muted); font-weight: 400; }
+.portfolio-info { padding-block: 1rem; font-family: var(--pf-font-sans); line-height: 1.5; }
+.portfolio-info p { margin: 0; font-size: inherit; line-height: inherit; }
+.portfolio-footnote { font-size: var(--pf-text-caption); color: var(--pf-color-text-muted); margin-block: 1rem; }
+.portfolio-about-visual { width: 100%; aspect-ratio: 0.78; overflow: hidden; }
+.portfolio-about-visual img { width: 100%; height: 100%; object-fit: cover; }
+.portfolio-about-wide { max-width: 60rem; margin-inline: auto; padding: var(--pf-page-gutter); }
+.portfolio-about-wide img { display: block; width: 100%; height: auto; }
+.portfolio-note-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--pf-grid-gutter); padding: var(--pf-page-gutter); }
+.portfolio-note-grid h2, .portfolio-intro h2 { font-size: var(--pf-text-section); line-height: 1.2; margin-bottom: 1rem; }
+.portfolio-note-grid p { font-size: var(--pf-text-body); line-height: var(--pf-leading-body); }
+.portfolio-intro { padding: var(--pf-section-space) var(--pf-page-gutter); }
+.portfolio-intro h1 { font-size: var(--pf-text-hero); line-height: 1.2; letter-spacing: var(--pf-tracking-hero); margin-block: 2rem; font-weight: 500; }
+.portfolio-intro p { font-size: var(--pf-text-body); line-height: var(--pf-leading-body); max-width: var(--pf-content-max-width); margin-block: 1rem; }
+.portfolio-intro a { display: inline-block; margin-top: 2rem; text-decoration: underline; text-underline-offset: 0.3em; }
+.portfolio-filters { display: flex; gap: 1.5rem; flex-wrap: wrap; padding: 1.5rem var(--pf-page-gutter); }
+.portfolio-filters a:hover { text-decoration: underline; text-underline-offset: 0.3em; }
+.portfolio-close { position: fixed; top: 0; right: 0; z-index: var(--pf-z-header); padding: 1rem var(--pf-page-gutter); background: var(--pf-white); font-size: var(--pf-text-nav); }
+.portfolio-detail { padding-inline: var(--pf-page-gutter); }
+.portfolio-detail-header { padding-block: 4rem 2rem; }
+.portfolio-detail-header > p { margin-top: 1.5rem; }
+.portfolio-detail-header h1 { font-family: var(--pf-font-display); font-size: var(--pf-text-display); line-height: 1; letter-spacing: var(--pf-tracking-display); margin-block: 1rem; }
+.portfolio-detail-lead { font-size: var(--pf-text-body); line-height: var(--pf-leading-body); }
+.portfolio-detail-cover { height: min(80svh, 58rem); background: var(--pf-off); overflow: hidden; }
+.portfolio-detail-cover > img { object-fit: contain; }
+.portfolio-detail-summary { display: grid; grid-template-columns: 1fr 2fr; gap: var(--pf-grid-gutter); padding-block: var(--pf-section-space); }
+.portfolio-detail-summary h2 { font-size: var(--pf-text-section); line-height: var(--pf-leading-section); }
+.portfolio-detail-summary p { max-width: var(--pf-content-max-width); font-size: var(--pf-text-body); line-height: var(--pf-leading-body); }
+.portfolio-detail-summary dl { display: grid; grid-template-columns: 5rem 1fr; gap: 0.75rem; margin-block: 2rem; }
+.portfolio-detail-summary dt { color: var(--pf-color-text-muted); }
+.portfolio-detail-summary a { text-decoration: underline; text-underline-offset: 0.3em; }
+.portfolio-detail-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--pf-grid-gutter); align-items: start; }
+.portfolio-detail-gallery img { display: block; width: 100%; height: auto; }
+.portfolio-detail-gallery figcaption { margin-top: 0.75rem; font-size: var(--pf-text-caption); color: var(--pf-color-text-muted); }
+.portfolio-next { padding-block: var(--pf-section-space); }
+.portfolio-next a { font-family: var(--pf-font-display); font-size: var(--pf-text-section); line-height: 1.3; display: block; margin-top: 1rem; }
+@media (max-width: 47.999rem) {
+  /* 정지 상태의 축소 미리보기 제목이 상단 클립 영역 안에 들어가도록 한다. */
+  body:not(.is-busy) .barba-container.container-menu b-header .main-header { transform: translateY(0); }
+  body:not(.is-busy) .container-menu .header-line { display: none; }
+  .portfolio-detail-summary, .portfolio-detail-gallery, .portfolio-note-grid { grid-template-columns: 1fr; }
+  .portfolio-detail-cover { height: 65svh; }
+  .portfolio-detail-header h1 { overflow-wrap: anywhere; }
+}

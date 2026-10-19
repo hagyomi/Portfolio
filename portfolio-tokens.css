@@ -1,0 +1,239 @@
+@charset "UTF-8";
+
+/*
+ * Personal portfolio tokens — design-guideline.md의 [제안] 기준.
+ * 사용: color: var(--pf-color-text); gap: var(--pf-grid-gutter);
+ * Mobile first. 48rem = 768px, 64rem = 1024px (기본 16px 기준).
+ * 미디어 쿼리에는 CSS custom property를 사용할 수 없어 분기값을 직접 명시한다.
+ * 이 파일은 토큰만 선언한다. reset, 컴포넌트 스타일, 폰트 다운로드는 포함하지 않는다.
+ */
+
+:root {
+  /* Palette — 사진 제외 UI 목표 비율: 흰색 80 / 어두운색 12 / off 5 / gray 3.
+   * 비율은 구성 지침이며 CSS로 강제하지 않는다.
+   */
+  --pf-white: #ffffff;
+  --pf-black: #000000;
+  --pf-dark: #212121;
+  --pf-off: #e3e3e3;
+  --pf-gray: #b0b0b0;
+  --pf-muted: #666666;
+
+  /* Semantic colors — 회색 장식과 읽어야 하는 텍스트를 분리한다. */
+  --pf-color-background: var(--pf-white);
+  --pf-color-surface: var(--pf-white);
+  --pf-color-placeholder: var(--pf-off);
+  --pf-color-text: var(--pf-dark);
+  --pf-color-heading: var(--pf-black);
+  --pf-color-text-muted: var(--pf-muted);
+  --pf-color-link: var(--pf-black);
+  --pf-color-border-decorative: var(--pf-off);
+  --pf-color-border-control: var(--pf-muted);
+  --pf-color-disabled-surface: var(--pf-off);
+  --pf-color-disabled-text: var(--pf-muted);
+  --pf-color-focus: var(--pf-black);
+  --pf-color-selection-background: var(--pf-black);
+  --pf-color-selection-text: var(--pf-white);
+  --pf-color-action-background: var(--pf-black);
+  --pf-color-action-text: var(--pf-white);
+  --pf-color-action-hover-background: var(--pf-dark);
+
+  /* Pretendard는 별도 설치한 경우에만 사용된다. Haas 파일은 포함하지 않는다. */
+  --pf-font-sans: "Pretendard", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --pf-font-display: var(--pf-font-sans);
+  --pf-font-weight-regular: 400;
+  --pf-font-weight-medium: 500;
+
+  /* Mobile typography — 영문 Display와 한글 Hero를 분리한다. */
+  --pf-text-display: clamp(3rem, 14vw, 5rem);
+  --pf-text-hero: clamp(2.25rem, 9vw, 2.75rem);
+  --pf-text-section: clamp(1.75rem, 7vw, 2rem);
+  --pf-text-body: 1rem;
+  --pf-text-caption: 0.875rem;
+  --pf-text-nav: 1rem;
+  --pf-leading-display: 1;
+  --pf-leading-hero: 1.15;
+  --pf-leading-section: 1.15;
+  --pf-leading-body: 1.65;
+  --pf-leading-caption: 1.4;
+  --pf-leading-nav: 1.2;
+  --pf-tracking-display: -0.04em;
+  --pf-tracking-hero: -0.03em;
+  --pf-tracking-section: -0.025em;
+  --pf-tracking-body: -0.01em;
+  --pf-tracking-caption: 0;
+  --pf-tracking-nav: -0.01em;
+
+  /* 4px 기준 공통 간격. 섹션 사이 간격은 전용 토큰을 사용한다. */
+  --pf-space-0: 0;
+  --pf-space-1: 0.25rem;
+  --pf-space-2: 0.5rem;
+  --pf-space-3: 0.75rem;
+  --pf-space-4: 1rem;
+  --pf-space-5: 1.25rem;
+  --pf-space-6: 1.5rem;
+  --pf-space-8: 2rem;
+  --pf-space-10: 2.5rem;
+  --pf-space-12: 3rem;
+  --pf-space-16: 4rem;
+  --pf-space-20: 5rem;
+  --pf-space-24: 6rem;
+  --pf-space-30: 7.5rem;
+  --pf-space-40: 10rem;
+
+  /* Layout — containerは全幅、長文のみ720px相当までに制限する。 */
+  --pf-container-width: 100%;
+  --pf-content-max-width: 45rem;
+  --pf-prose-measure: 32ic;
+  --pf-page-gutter: clamp(1rem, 4vw, 1.25rem);
+  --pf-grid-columns: 4;
+  --pf-grid-gutter: 1rem;
+  --pf-project-columns: 1;
+  --pf-section-space: clamp(4rem, 12vw, 5rem);
+  --pf-caption-gap: clamp(0.5rem, 2vw, 0.75rem);
+  --pf-project-row-gap: var(--pf-section-space);
+
+  /* Components — 문서에 없는 헤더·버튼 padding은 구현 시작값이다.
+   * 헤더가 줄바꿈되면 실제 높이를 측정해 --pf-header-height를 덮어쓴다.
+   */
+  --pf-header-height: 4rem;
+  --pf-anchor-offset: calc(var(--pf-header-height) + var(--pf-space-4));
+  --pf-control-min-size: 2.75rem;
+  --pf-button-padding-inline: var(--pf-space-5);
+  --pf-button-padding-block: var(--pf-space-3);
+  --pf-radius-none: 0;
+  --pf-radius-button: 0.125rem;
+  --pf-shadow-card: none;
+  --pf-border-width: 1px;
+  --pf-focus-width: 2px;
+  --pf-focus-offset: 4px;
+  --pf-focus-outline: var(--pf-focus-width) solid var(--pf-color-focus);
+  --pf-link-underline-width: 1px;
+  --pf-link-underline-offset: 0.2em;
+
+  /* aspect-ratioは幅 / 高さ。原本の高さ / 幅 0.7・1.2・1.0を変換。 */
+  --pf-ratio-landscape: 10 / 7;
+  --pf-ratio-portrait: 5 / 6;
+  --pf-ratio-square: 1 / 1;
+  --pf-image-position: 50% 50%;
+
+  /* Optional preview navigation — Desktopのみ43:33:24、以下は縦積み。 */
+  --pf-preview-direction: column;
+  --pf-preview-tracks: minmax(0, 1fr);
+  --pf-preview-scale-hover: 1;
+
+  /* Motion — CSS用時間はms、GSAP用時間は単位なし秒を並行定義。
+   * JSはgetComputedStyleで読み、GSAP値をNumberで変換する。
+   * JSでもprefers-reduced-motionを監視し、大きな移動・自動再生を停止する。
+   */
+  --pf-duration-hover: 200ms;
+  --pf-duration-reveal: 550ms;
+  --pf-duration-page: 650ms;
+  --pf-duration-stagger: 70ms;
+  --pf-gsap-duration-hover: 0.2;
+  --pf-gsap-duration-reveal: 0.55;
+  --pf-gsap-duration-page: 0.65;
+  --pf-gsap-duration-stagger: 0.07;
+  --pf-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --pf-ease-enter: cubic-bezier(0.54, 0.15, 0.15, 1);
+  --pf-ease-exit: cubic-bezier(0.85, 0, 0.45, 0.85);
+  --pf-reveal-distance: 1.5rem;
+  --pf-link-hover-distance: 0.25rem;
+  --pf-card-scale-hover: 1;
+  --pf-scroll-behavior: auto;
+
+  /* Layer値は実装開始値。親要素のstacking contextにも注意する。 */
+  --pf-z-base: 0;
+  --pf-z-header: 20;
+  --pf-z-menu: 40;
+  --pf-z-transition: 60;
+  --pf-z-skip-link: 80;
+}
+
+/* 暗い領域で明示的に使用。OSの配色設定では自動切替しない。 */
+[data-portfolio-theme="dark"] {
+  --pf-color-background: var(--pf-dark);
+  --pf-color-surface: var(--pf-black);
+  --pf-color-placeholder: var(--pf-muted);
+  --pf-color-text: var(--pf-white);
+  --pf-color-heading: var(--pf-white);
+  --pf-color-text-muted: var(--pf-off);
+  --pf-color-link: var(--pf-white);
+  --pf-color-border-decorative: var(--pf-muted);
+  --pf-color-border-control: var(--pf-gray);
+  --pf-color-disabled-surface: var(--pf-muted);
+  --pf-color-disabled-text: var(--pf-white);
+  --pf-color-focus: var(--pf-white);
+  --pf-color-selection-background: var(--pf-white);
+  --pf-color-selection-text: var(--pf-black);
+  --pf-color-action-background: var(--pf-white);
+  --pf-color-action-text: var(--pf-black);
+  --pf-color-action-hover-background: var(--pf-off);
+  /* 再定義によりスコープ内のfocus色を参照する。 */
+  --pf-focus-outline: var(--pf-focus-width) solid var(--pf-color-focus);
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --pf-text-display: clamp(5rem, 11.72vw, 7.5rem);
+    --pf-text-hero: clamp(3rem, 6.25vw, 4rem);
+    --pf-text-section: clamp(2rem, 4.17vw, 2.5rem);
+    --pf-text-body: 1.125rem;
+    --pf-text-caption: 1rem;
+    --pf-page-gutter: 1.5rem;
+    --pf-grid-columns: 8;
+    --pf-grid-gutter: 1.25rem;
+    --pf-project-columns: 2;
+    --pf-section-space: clamp(5rem, 10.94vw, 7rem);
+    --pf-caption-gap: 0.75rem;
+    --pf-header-height: 5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --pf-text-display: clamp(6rem, 14vw, 13.75rem);
+    --pf-text-hero: clamp(4rem, 6.25vw, 6rem);
+    --pf-text-section: clamp(2.5rem, 3.9vw, 3.5rem);
+    --pf-text-nav: clamp(1rem, 1.25vw, 1.125rem);
+    --pf-leading-display: 0.95;
+    --pf-page-gutter: clamp(1.5rem, 2.5vw, 2.5rem);
+    --pf-grid-columns: 12;
+    --pf-grid-gutter: 1.5rem;
+    --pf-section-space: clamp(7.5rem, 10vw, 10rem);
+    --pf-caption-gap: clamp(0.75rem, 1vw, 1rem);
+    --pf-preview-direction: row;
+    --pf-preview-tracks: minmax(0, 43fr) minmax(0, 33fr) minmax(0, 24fr);
+  }
+}
+
+/* 터치에서는 Hover 확대를 기본값으로 켜지 않는다. */
+@media (hover: hover) and (pointer: fine) {
+  :root { --pf-card-scale-hover: 1.02; }
+}
+
+@media (min-width: 64rem) and (hover: hover) and (pointer: fine) {
+  :root { --pf-preview-scale-hover: 0.98; }
+}
+
+/* 마지막에 선언해 화면 크기·입력 장치와 관계없이 모션을 줄인다.
+ * 소비 컴포넌트는 이 토큰을 사용해야 하며, 콘텐츠를 기본 숨김으로 두지 않는다.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --pf-duration-hover: 0ms;
+    --pf-duration-reveal: 0ms;
+    --pf-duration-page: 0ms;
+    --pf-duration-stagger: 0ms;
+    --pf-gsap-duration-hover: 0;
+    --pf-gsap-duration-reveal: 0;
+    --pf-gsap-duration-page: 0;
+    --pf-gsap-duration-stagger: 0;
+    --pf-reveal-distance: 0rem;
+    --pf-link-hover-distance: 0rem;
+    --pf-card-scale-hover: 1;
+    --pf-preview-scale-hover: 1;
+    --pf-scroll-behavior: auto;
+  }
+}

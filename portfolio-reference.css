@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+/* 기존 portfolio-tokens.css와 원본 컴포넌트의 연결 계층.
+ * 원본의 3개 패널·Masonry·페이지 전환은 유지한다.
+ * 로컬 폰트는 reference clone용이며 개인 브랜드로 변경 시 사용권을 확인한다.
+ */
+:root {
+  --pf-font-sans: "haas-grotesk-tx-pro", "Malgun Gothic", system-ui, sans-serif;
+  --pf-font-display: "haas-grotesk-ds-pro", "Malgun Gothic", system-ui, sans-serif;
+  --font-sans: var(--pf-font-sans);
+  --font-disp: var(--pf-font-display);
+  --color-black: var(--pf-black);
+  --color-dark: var(--pf-dark);
+  --color-white: var(--pf-white);
+  --color-off: var(--pf-off);
+  --color-gray: var(--pf-gray);
+  --section-spacing: var(--pf-page-gutter);
+  --section-spacing-2x: calc(var(--pf-page-gutter) * 2);
+  --columns-gap: var(--pf-grid-gutter);
+  --ease-in-bazi: var(--pf-ease-enter);
+  --ease-out-bazi: var(--pf-ease-exit);
+}
+
+body {
+  font-family: var(--pf-font-sans);
+  background: var(--pf-color-background);
+  color: var(--pf-color-heading);
+}
+
+.main-header {
+  font-family: var(--pf-font-display);
+  font-size: var(--pf-text-display);
+  font-weight: var(--pf-font-weight-medium);
+  letter-spacing: var(--pf-tracking-display);
+}
+
+.work-list-item {
+  font-size: var(--pf-text-caption);
+  line-height: var(--pf-leading-caption);
+}
+
+/* 접힌 상세 헤더의 큰 글자가 토큰 거터 위로 잘려 보이지 않게 한다. */
+b-header[collapsed="true"] .main-header { visibility: hidden; }
+
+.paragraph p {
+  font-size: var(--pf-text-body);
+  line-height: var(--pf-leading-body);
+}
+
+::selection {
+  color: var(--pf-color-selection-text);
+  background: var(--pf-color-selection-background);
+}
+
+:focus-visible {
+  outline: var(--pf-focus-outline);
+  outline-offset: var(--pf-focus-offset);
+}
+
+.homepage-menu.is-dark :focus-visible { outline-color: var(--pf-white); }
+
+.portfolio-skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: var(--pf-z-skip-link);
+  padding: 0.75rem 1rem;
+  color: var(--pf-white);
+  background: var(--pf-black);
+  transform: translateY(-200%);
+}
+.portfolio-skip-link:focus { transform: translateY(0); }
+#portfolio-content:focus { outline: none; }
+
+/* 포인터 장식이 로드되지 않아도 링크는 일반 커서로 사용할 수 있다. */
+a.cursor-none { cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
