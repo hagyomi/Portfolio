@@ -7,3 +7,7 @@ preview-desktop.png
 .env
 .env.*
 !.env.example
+.vercel/
+
+.vercel
+.env*

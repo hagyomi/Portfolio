@@ -1,0 +1,8 @@
+.git
+_site
+qa
+__pycache__
+scripts/__pycache__
+preview-desktop.png
+node_modules
+.env*
