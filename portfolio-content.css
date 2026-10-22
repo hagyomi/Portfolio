@@ -1,5 +1,31 @@
 @charset "UTF-8";
 
+.portfolio-ai-videos { display: grid; gap: 2rem; padding: 2rem var(--pf-page-gutter) 5rem; }
+.portfolio-ai-videos > figure { scroll-margin-top: 6rem; }
+.portfolio-ai-videos video { display: block; width: 100%; max-height: 75svh; object-fit: contain; background: #111; }
+.portfolio-ai-videos figcaption, .portfolio-ai-videos p { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.75rem; }
+.portfolio-ai-videos span { color: var(--pf-color-text-muted); }
+.container-menu .portfolio-ai-videos > a {
+  display: block;
+  overflow: hidden;
+}
+.container-menu .portfolio-ai-videos > a > video {
+  transition: transform 0.35s ease;
+}
+body .barba-container.container-menu .portfolio-ai-videos > a {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto !important;
+}
+body .barba-container.container-menu .portfolio-ai-videos > a * {
+  pointer-events: auto !important;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  body:not(.is-busy) .container-menu .portfolio-ai-videos > a:hover > video {
+    transform: scale(1.05);
+  }
+}
+
 /* Content-only additions to the existing portfolio/reference layout. */
 /* Keep the home panels still and let individual cards receive pointer input. */
 body:not(.is-busy) .container-menu .menu-column:hover .menu-page-wrap {

@@ -22,11 +22,11 @@ PROJECTS = [
          summary='자연에서 시작되는 핸드케어의 시각적 이야기.',
          description='캐모마일과 식물성 원료의 이미지를 바탕으로 카밀의 핸드케어 제품을 소개합니다. 차분한 뉴트럴 톤과 넓은 여백으로 브랜드 이야기, 제품군, 선물 구성을 연결했습니다.',
          focus='자연의 색 · 브랜드 스토리 · 제품 탐색', gallery=[(2,'브랜드 비주얼'),(3,'제품 이야기'),(4,'제품 라인업')]),
-    dict(slug='tous', title='TOUS les JOURS', ko='뚜레쥬르', node='20:1811', category='Web Design', ratio=1,
+    dict(slug='tous', title='TOUS les JOURS', ko='뚜레쥬르', node='20:1811', category='Web Design', ratio=1, website='https://hagyomi.github.io/Touslesjours/',
          summary='갓 구운 빵처럼 따뜻한 일상을 담은 베이커리 웹 디자인.',
          description='메뉴, 계절 선물, Daily Picks, 이벤트, 브랜드 스토리와 매장 안내로 이어지는 웹 화면입니다. 빵과 커피의 사진, 여유 있는 타이포그래피로 일상의 따뜻한 순간을 표현했습니다.',
          focus='메뉴 탐색 · 시즌 콘텐츠 · 브랜드 경험', gallery=[(1,'Hero 이미지 레이어 01'),(2,'Hero 이미지 레이어 02'),(3,'Hero 이미지 레이어 03')]),
-    dict(slug='kvelo', title='K VELO', ko='케이벨로', node='20:2871', category='Web Design', ratio=2,
+    dict(slug='kvelo', title='K VELO', ko='케이벨로', node='20:2871', category='Web Design', ratio=2, website='https://hagyomi.github.io/k-velo/',
          summary='자전거와 여행, 새로운 경험으로 이어지는 웹 디자인.',
          description='라이딩 여행과 자전거 행사를 탐색하고 라이더의 이야기를 만나는 화면입니다. 넓은 라이딩 사진과 경쾌한 포인트 컬러를 사용해 여행 콘텐츠의 활기와 탐색 흐름을 담았습니다.',
          focus='여행 탐색 · 행사 정보 · 라이더 이야기', gallery=[(2,'라이딩 여행 01'),(3,'라이딩 여행 02'),(4,'라이딩 여행 03')]),
@@ -96,7 +96,7 @@ def event_sections(projects=None):
 
 def website_cards():
     return '<div class="portfolio-website-list">'+''.join(
-        f'<a href="/works/{p["slug"]}/" class="portfolio-website-card" data-website="{p["slug"]}" target="_blank" rel="noopener noreferrer" data-barba-prevent="all" aria-label="{escape(p["ko"])} 웹사이트 전체 작업 보기 (새 탭)"><div class="portfolio-website-thumbnail"><img src="/assets/portfolio/full/{p["slug"]}.png" alt="{escape(p["ko"])} 웹사이트 디자인" loading="eager" decoding="async"></div><div class="portfolio-website-caption">{escape(p["title"])}<span aria-hidden="true">↗</span></div></a>' for p in WEBSITE_PROJECTS
+        f'<a href="{p.get("website", "/works/" + p["slug"] + "/")}" class="portfolio-website-card" data-website="{p["slug"]}" target="_blank" rel="noopener noreferrer" data-barba-prevent="all" aria-label="{escape(p["ko"])} 웹사이트 전체 작업 보기 (새 탭)"><div class="portfolio-website-thumbnail"><img src="/assets/portfolio/full/{p["slug"]}.png" alt="{escape(p["ko"])} 웹사이트 디자인" loading="eager" decoding="async"></div><div class="portfolio-website-caption">{escape(p["title"])}<span aria-hidden="true">↗</span></div></a>' for p in WEBSITE_PROJECTS
     )+'</div>'
 
 def footer():
@@ -113,7 +113,7 @@ def clean(source, title):
     source=re.sub(r'(?:maximum-scale=1\.0,?\s*|user-scalable=no,?\s*)','',source)
     source=source.replace('shrink-to-fit=no, ','shrink-to-fit=no')
     source=source.replace('lang="en-US"','lang="ko"')
-    source=transform(source,lambda n:n.has('main-header') and source[n.inner:n.end_inner].strip()=='More','Banner')
+    source=transform(source,lambda n:n.has('main-header') and source[n.inner:n.end_inner].strip()=='More','AI video')
     source=transform(source,lambda n:n.has('main-header') and source[n.inner:n.end_inner].strip()=='Works','<span class="portfolio-event-title">Event Page - Figma</span>')
     source=re.sub(r'<meta\b[^>]*(?:property="og:title"|name="twitter:title")[^>]*>', '<meta property="og:title" content="'+escape(title)+' · Design Portfolio">',source)
     source=transform(source,lambda n:n.tag=='footer',footer())
@@ -180,7 +180,15 @@ def clear_banner_content(source, preview=False):
     header = next(n for n in doc.nodes if n.tag == 'b-header' and area.inner <= n.start < area.end_inner)
     header_area = next(n for n in doc.nodes if n.tag == 'b-cursor-area' and
                        area.inner <= n.start < header.start and n.end >= header.end)
-    return source[:header_area.end] + '\n' + source[area.end_inner:]
+    cards = []
+    for slug, title in [('coffee-ad', '커피 광고'), ('pawly', 'PAWLY')]:
+        src = '/assets/portfolio/video/' + slug + '.mp4'
+        video = '<video playsinline preload="metadata" ' + ('muted tabindex="-1" aria-hidden="true"' if preview else 'controls aria-label="' + title + ' 영상"') + '><source src="' + src + '" type="video/mp4">영상을 재생하려면 <a href="' + src + '">' + title + ' 다운로드</a></video>'
+        if preview and slug == 'coffee-ad':
+            video = video.replace('<video ', '<video poster="/assets/portfolio/video/sipon.png" ', 1).replace('preload="metadata"', 'preload="none"', 1)
+        cards.append(('<a href="/more/#' + slug + '" aria-label="' + title + ' 영상 보기">' + video + '<p>' + title + ' <span>AI video ↗</span></p></a>') if preview else ('<figure id="' + slug + '">' + video + '<figcaption>' + title + ' <span>AI video</span></figcaption></figure>'))
+    content = ''.join(cards)
+    return source[:header_area.end] + '\n<section class="portfolio-ai-videos" aria-label="AI video 작업">' + content + '</section>\n' + source[area.end_inner:]
 
 home = clear_banner_content(home, preview=True)
 more = clear_banner_content(more)
@@ -188,7 +196,7 @@ more = clear_banner_content(more)
 write('',home,'Portfolio')
 write('works',works,'Event Page - Figma')
 write('atlason',about,'WebSite — 뚜레쥬르 · 케이벨로')
-write('more',more,'Banner')
+write('more',more,'AI video')
 
 # Category pages use the same existing works shell and its tabs.
 for category,route in [(None,'works/archive'),('Web Design','works/furniture/archive'),('Promotion','works/packaging/archive'),('Detail Page','works/products/archive')]:
