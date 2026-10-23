@@ -6,6 +6,54 @@
 .portfolio-ai-videos > a > img { display: block; width: 100%; height: auto; background: transparent; border: 0; box-shadow: none; }
 .portfolio-ai-videos figcaption, .portfolio-ai-videos p { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.75rem; }
 .portfolio-ai-videos span { color: var(--pf-color-text-muted); }
+.portfolio-film-story { width: 100%; max-width: 72rem; min-width: 0; margin: 1rem auto 4rem; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
+.portfolio-film-intro { padding-block: 2rem 3rem; }
+.portfolio-film-intro h2 { font-family: var(--pf-font-display); font-size: clamp(1.75rem, 4vw, 4rem); line-height: 1.15; letter-spacing: -0.035em; }
+.portfolio-ai-videos .portfolio-film-story p { display: block; margin-block: 1rem; }
+.portfolio-film-tagline { color: var(--pf-color-text-muted); letter-spacing: 0.08em; }
+.portfolio-film-story > section { border-top: 1px solid var(--pf-color-text-muted); padding-block: 2rem 3rem; }
+.portfolio-film-story h3 { font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 500; line-height: 1.4; margin-bottom: 1.5rem; }
+.portfolio-film-story h3 small { display: block; font-size: 0.8em; font-weight: 400; color: var(--pf-color-text-muted); margin-top: 0.25rem; }
+.portfolio-film-story h4 { font-size: 1.125rem; font-weight: 500; margin-top: 2rem; }
+.portfolio-film-story ul { list-style: disc; padding-left: 1.25rem; margin-block: 1rem; }
+.portfolio-film-story li + li { margin-top: 0.4rem; }
+.portfolio-film-table { max-width: 100%; overflow-x: auto; }
+.portfolio-film-table table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
+.portfolio-film-table th, .portfolio-film-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--pf-off); vertical-align: top; }
+.portfolio-film-table th { font-weight: 500; }
+.portfolio-film-table th:first-child { white-space: nowrap; }
+.portfolio-film-table thead { background: var(--pf-off); }
+.portfolio-film-storyboard { min-width: 40rem; }
+.portfolio-film-copy { font-size: clamp(1.25rem, 2.5vw, 2rem); line-height: 1.5; }
+.container-menu .portfolio-film-story { display: none; }
+/* Keep the AI video title inside a full-height fixed header while scrolling. */
+.container-page:has(.portfolio-ai-videos) b-header .header {
+  height: auto !important;
+  background: var(--pf-white);
+}
+.container-page:has(.portfolio-ai-videos) b-header [data-el="header"] {
+  height: auto !important;
+  padding-bottom: 0;
+}
+.container-page:has(.portfolio-ai-videos) b-header .menu-padding {
+  position: relative;
+  padding: var(--pf-page-gutter);
+  padding-right: calc(var(--pf-page-gutter) + 3rem);
+}
+.container-page:has(.portfolio-ai-videos) b-header .main-header {
+  visibility: visible;
+  transform: none !important;
+  line-height: 1.05;
+}
+.container-page:has(.portfolio-ai-videos) b-header [data-el="back"] {
+  height: calc(var(--pf-text-display) * 1.05 + var(--pf-page-gutter) * 2);
+}
+.container-page:has(.portfolio-ai-videos) b-header .header-bg {
+  max-height: none;
+}
+.container-page:has(.portfolio-ai-videos) b-header .header-line {
+  display: none;
+}
 .portfolio-ai-videos > a,
 .portfolio-ai-videos > figure {
   display: block;

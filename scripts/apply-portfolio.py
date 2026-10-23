@@ -188,6 +188,8 @@ def clear_banner_content(source, preview=False):
             poster = {'coffee-ad': 'sipon', 'saekomdalkom': 'saekomdalkom-thumbnail'}.get(slug, slug)
             video = '<img src="/assets/portfolio/video/' + poster + '.png" alt="' + title + '" decoding="async">'
         cards.append(('<a href="/more/#' + slug + '" aria-label="' + title + ' 영상 보기">' + video + '<p>' + title + ' <span>AI video ↗</span></p></a>') if preview else ('<figure id="' + slug + '">' + video + '<figcaption>' + title + ' <span>AI video</span></figcaption></figure>'))
+        if not preview and slug == 'coffee-ad':
+            cards.append((ROOT / 'scripts/content/sipon.html').read_text(encoding='utf-8'))
     content = ''.join(cards)
     return source[:header_area.end] + '\n<section class="portfolio-ai-videos" aria-label="AI video 작업">' + content + '</section>\n' + source[area.end_inner:]
 
