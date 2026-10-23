@@ -139,7 +139,7 @@ for key,source in [('home',home),('profile',about)]:
 
 # Home background variants: retain the number of slots so existing random cookies remain valid.
 home=transform(home,lambda n:n.attrs.get('data-el')=='cover-images','<img src="/assets/portfolio/background.png" alt="" class="portfolio-background" width="1888" height="1338" loading="eager" decoding="async">')
-home=transform(home,lambda n:n.has('menu-logo'),'Loading')
+home=transform(home,lambda n:n.has('menu-logo'),'Loading<span class="portfolio-loading-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span></span>')
 home=transform(home,lambda n:n.has('work-list'),event_sections())
 works=transform(works,lambda n:n.has('work-list'),event_sections())
 
