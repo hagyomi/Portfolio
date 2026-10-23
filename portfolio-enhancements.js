@@ -9,7 +9,7 @@
             const project = {
                 '/assets/portfolio/video/coffee-ad.mp4': ['coffee-ad', 'sipon', '커피 광고'],
                 '/assets/portfolio/video/pawly.mp4': ['pawly', 'pawly', 'PAWLY'],
-                '/assets/portfolio/video/saekomdalkom.mp4': ['saekomdalkom', 'saekomdalkom', '새콤달콤'],
+                '/assets/portfolio/video/saekomdalkom.mp4': ['saekomdalkom', 'saekomdalkom-thumbnail', '새콤달콤'],
             }[src];
             if (!project) return;
             const [slug, poster, title] = project;

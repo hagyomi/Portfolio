@@ -118,7 +118,7 @@ def clean(source, title):
     source=re.sub(r'<meta\b[^>]*(?:property="og:title"|name="twitter:title")[^>]*>', '<meta property="og:title" content="'+escape(title)+' · Design Portfolio">',source)
     source=transform(source,lambda n:n.tag=='footer',footer())
     if '/portfolio-content.css' not in source:source=source.replace('</head>','<link rel="stylesheet" href="/portfolio-content.css?v=20261015-6">\n</head>')
-    source=source.replace('src="/portfolio-enhancements.js"', 'src="/portfolio-enhancements.js?v=20261022-1"')
+    source=source.replace('src="/portfolio-enhancements.js"', 'src="/portfolio-enhancements.js?v=20261023-2"')
     source=re.sub(r'<!-- Local reference study.*?-->','<!-- Personal portfolio content from the supplied Figma projects; layout reference: ATLASON. -->',source,flags=re.S)
     return source
 
@@ -185,7 +185,7 @@ def clear_banner_content(source, preview=False):
         src = '/assets/portfolio/video/' + slug + '.mp4'
         video = '<video playsinline preload="metadata" ' + ('muted tabindex="-1" aria-hidden="true"' if preview else 'controls aria-label="' + title + ' 영상"') + '><source src="' + src + '" type="video/mp4">영상을 재생하려면 <a href="' + src + '">' + title + ' 다운로드</a></video>'
         if preview:
-            poster = 'sipon' if slug == 'coffee-ad' else slug
+            poster = {'coffee-ad': 'sipon', 'saekomdalkom': 'saekomdalkom-thumbnail'}.get(slug, slug)
             video = '<img src="/assets/portfolio/video/' + poster + '.png" alt="' + title + '" decoding="async">'
         cards.append(('<a href="/more/#' + slug + '" aria-label="' + title + ' 영상 보기">' + video + '<p>' + title + ' <span>AI video ↗</span></p></a>') if preview else ('<figure id="' + slug + '">' + video + '<figcaption>' + title + ' <span>AI video</span></figcaption></figure>'))
     content = ''.join(cards)
