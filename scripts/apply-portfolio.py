@@ -117,7 +117,7 @@ def clean(source, title):
     source=transform(source,lambda n:n.has('main-header') and source[n.inner:n.end_inner].strip()=='Works','<span class="portfolio-event-title">Event Page - Figma</span>')
     source=re.sub(r'<meta\b[^>]*(?:property="og:title"|name="twitter:title")[^>]*>', '<meta property="og:title" content="'+escape(title)+' · Design Portfolio">',source)
     source=transform(source,lambda n:n.tag=='footer',footer())
-    if '/portfolio-content.css' not in source:source=source.replace('</head>','<link rel="stylesheet" href="/portfolio-content.css?v=20261015-6">\n</head>')
+    if '/portfolio-content.css' not in source:source=source.replace('</head>','<link rel="stylesheet" href="/portfolio-content.css?v=20261023-3">\n</head>')
     source=source.replace('src="/portfolio-enhancements.js"', 'src="/portfolio-enhancements.js?v=20261023-2"')
     source=re.sub(r'<!-- Local reference study.*?-->','<!-- Personal portfolio content from the supplied Figma projects; layout reference: ATLASON. -->',source,flags=re.S)
     return source

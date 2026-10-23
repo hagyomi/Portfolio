@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 .menu-logo:has(.portfolio-loading-dots) { position: relative; line-height: 0.9; }
-.portfolio-loading-dots { position: absolute; top: 100%; left: 0; width: 100%; display: block; margin: 0; text-align: center; font-size: 0.22em; line-height: 0.5; letter-spacing: 0.2em; }
+.portfolio-loading-dots { position: absolute; top: 100%; left: 0; width: 100%; display: flex; justify-content: center; align-items: center; gap: clamp(5px, 0.7vw, 12px); margin-top: 0.75rem; line-height: 1; }
 .homepage-menu:is(.menu-loaded, .all-loaded) .menu-logo,
 .homepage-menu:is(.menu-loaded, .all-loaded) .portfolio-loading-dots { display: none !important; }
-.portfolio-loading-dots > span { animation: portfolio-loading-dot 1.4s infinite; }
+.portfolio-loading-dots > span { display: block; width: clamp(5px, 0.7vw, 12px); height: clamp(5px, 0.7vw, 12px); border-radius: 50%; background: currentColor; font-size: 0; flex: none; animation: portfolio-loading-dot 1.4s infinite; }
 .portfolio-loading-dots > span:nth-child(2) { animation-delay: 0.15s; }
 .portfolio-loading-dots > span:nth-child(3) { animation-delay: 0.3s; }
 .portfolio-loading-dots > span:nth-child(4) { animation-delay: 0.45s; }
