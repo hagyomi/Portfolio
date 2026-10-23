@@ -139,7 +139,7 @@ for key,source in [('home',home),('profile',about)]:
 
 # Home background variants: retain the number of slots so existing random cookies remain valid.
 home=transform(home,lambda n:n.attrs.get('data-el')=='cover-images','<img src="/assets/portfolio/background.png" alt="" class="portfolio-background" width="1888" height="1338" loading="eager" decoding="async">')
-home=transform(home,lambda n:n.has('menu-logo'),'Portfolio')
+home=transform(home,lambda n:n.has('menu-logo'),'Loading')
 home=transform(home,lambda n:n.has('work-list'),event_sections())
 works=transform(works,lambda n:n.has('work-list'),event_sections())
 
@@ -250,3 +250,5 @@ for slug,title,body in [
 
 (ROOT/'portfolio-projects.json').write_text(json.dumps(PROJECTS,ensure_ascii=False,indent=2),encoding='utf-8')
 print('Applied 5 Figma projects. Home structure, GSAP/Barba namespaces and original tokens retained.')
+import runpy
+runpy.run_path(str(ROOT / 'scripts/build-ai-pages.py'), run_name='__main__')

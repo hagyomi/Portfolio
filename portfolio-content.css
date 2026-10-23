@@ -3,7 +3,12 @@
 .portfolio-ai-videos { display: grid; gap: 2rem; padding: 2rem var(--pf-page-gutter) 5rem; }
 .portfolio-ai-videos > figure { scroll-margin-top: 6rem; }
 .portfolio-ai-videos video { display: block; width: 100%; max-height: 75svh; object-fit: contain; background: #111; }
+.portfolio-ai-videos > :is(#coffee-ad, #pawly, #saekomdalkom) { width: 100%; max-width: 1920px; margin-inline: auto; }
+.portfolio-ai-videos > :is(#coffee-ad, #pawly, #saekomdalkom) > video { width: 100%; height: auto; max-height: none; aspect-ratio: 16 / 9; padding: 100px; box-sizing: border-box; background: #fff; }
 .portfolio-ai-videos > a > img { display: block; width: 100%; height: auto; background: transparent; border: 0; box-shadow: none; }
+.portfolio-ai-videos > a > img:is([src="/assets/portfolio/video/sipon.png"], [src="/assets/portfolio/video/pawly.png"], [src="/assets/portfolio/video/saekomdalkom-thumbnail.png"]) { padding: 200px; box-sizing: border-box; background: #fff; }
+.container-menu .portfolio-ai-videos > a > img { padding: 0; }
+.portfolio-film-zoom { position: fixed; z-index: 9999; max-width: none; object-fit: contain; padding: 0; background: #fff; pointer-events: none; }
 .portfolio-ai-videos figcaption, .portfolio-ai-videos p { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.75rem; }
 .portfolio-ai-videos span { color: var(--pf-color-text-muted); }
 .portfolio-film-story { width: 100%; max-width: 72rem; min-width: 0; margin: 1rem auto 4rem; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
@@ -26,6 +31,10 @@
 .portfolio-film-storyboard { min-width: 40rem; }
 .portfolio-film-copy { font-size: clamp(1.25rem, 2.5vw, 2rem); line-height: 1.5; }
 .container-menu .portfolio-film-story { display: none; }
+.portfolio-film-nav { display: flex; flex-wrap: wrap; gap: 1rem 2rem; padding-block: 0.5rem 1rem; }
+.portfolio-film-nav a { text-underline-offset: 0.25em; }
+.portfolio-film-nav a:hover { text-decoration: underline; }
+.container-menu .portfolio-film-nav { display: none; }
 /* Keep the AI video title inside a full-height fixed header while scrolling. */
 .container-page:has(.portfolio-ai-videos) b-header .header {
   height: auto !important;
@@ -53,6 +62,14 @@
 }
 .container-page:has(.portfolio-ai-videos) b-header .header-line {
   display: none;
+}
+body.ai-video-scrolled .container-page:has(.portfolio-ai-videos) b-header .header {
+  visibility: hidden;
+  pointer-events: none;
+}
+body.ai-video-scrolled .container-page:has(.portfolio-ai-videos) b-header .header * {
+  visibility: hidden;
+  pointer-events: none;
 }
 .portfolio-ai-videos > a,
 .portfolio-ai-videos > figure {
@@ -86,15 +103,13 @@ a[data-project] .image-wrap,
 a[data-website] .portfolio-website-thumbnail { overflow: hidden; }
 a[data-project] .image-wrap > *,
 a[data-website] .portfolio-website-thumbnail img,
-.portfolio-ai-videos > a > img,
-.portfolio-ai-videos > figure > video {
+.portfolio-ai-videos > a > img {
   transition: transform 0.35s ease;
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   body:not(.is-busy) a[data-project]:hover .image-wrap > *,
   body:not(.is-busy) a[data-website]:hover .portfolio-website-thumbnail img,
-  body:not(.is-busy) .portfolio-ai-videos > a:hover > img,
-  body:not(.is-busy) .portfolio-ai-videos > figure:hover > video {
+  body:not(.is-busy) .portfolio-ai-videos > a:hover > img {
     transform: scale(1.05);
   }
 }

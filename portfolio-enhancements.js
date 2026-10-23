@@ -1,43 +1,74 @@
 /* Local study additions: keyboard entry point and reduced-motion navigation. */
 (() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function updateVideoTitle() {
+        document.body.classList.toggle('ai-video-scrolled', window.scrollY > 20);
+    }
+    window.addEventListener('scroll', updateVideoTitle, { passive: true });
+    updateVideoTitle();
     // The return transition copies the detail page into the miniature home panel.
-    // Restore image cards there so video playback state never becomes a thumbnail.
+    // Restore the entire collection: an individual detail contains only one film.
     function restoreVideoThumbnails() {
-        document.querySelectorAll('.container-menu .portfolio-ai-videos video').forEach((video) => {
-            const src = video.querySelector('source')?.getAttribute('src');
-            const project = {
-                '/assets/portfolio/video/coffee-ad.mp4': ['coffee-ad', 'sipon', '커피 광고'],
-                '/assets/portfolio/video/pawly.mp4': ['pawly', 'pawly', 'PAWLY'],
-                '/assets/portfolio/video/saekomdalkom.mp4': ['saekomdalkom', 'saekomdalkom-thumbnail', '새콤달콤'],
-            }[src];
-            if (!project) return;
-            const [slug, poster, title] = project;
-            const image = document.createElement('img');
-            image.src = `/assets/portfolio/video/${poster}.png`;
-            image.alt = title;
-            image.decoding = 'async';
-            const figure = video.closest('figure');
-            if (figure) {
+        const projects = [
+            ['coffee-ad', 'sipon', 'SIPON — 커피 광고'],
+            ['pawly', 'pawly', 'PAWLY'],
+            ['saekomdalkom', 'saekomdalkom-thumbnail', '새콤달콤'],
+        ];
+        document.querySelectorAll('.container-menu .portfolio-ai-videos').forEach((section) => {
+            const complete = section.children.length === projects.length && projects.every(([slug, poster], index) => {
+                const link = section.children[index];
+                return link.tagName === 'A' && link.getAttribute('href') === `/more/${slug}/` &&
+                    link.children.length === 1 && link.firstElementChild?.getAttribute('src') === `/assets/portfolio/video/${poster}.png`;
+            });
+            if (complete) return;
+            section.querySelectorAll('video').forEach(video => video.pause());
+            const links = projects.map(([slug, poster, title]) => {
                 const link = document.createElement('a');
-                link.href = `/more/#${slug}`;
+                link.href = `/more/${slug}/`;
                 link.setAttribute('aria-label', `${title} 영상 보기`);
-                const caption = document.createElement('p');
-                caption.append(title + ' ');
-                const label = document.createElement('span');
-                label.textContent = 'AI video ↗';
-                caption.append(label);
-                link.append(image, caption);
-                video.pause();
-                figure.replaceWith(link);
-            } else {
-                video.pause();
-                video.replaceWith(image);
-            }
+                const image = document.createElement('img');
+                image.src = `/assets/portfolio/video/${poster}.png`;
+                image.alt = title;
+                image.decoding = 'async';
+                link.append(image);
+                return link;
+            });
+            section.replaceChildren(...links);
         });
     }
-    new MutationObserver(restoreVideoThumbnails).observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(restoreVideoThumbnails).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
     restoreVideoThumbnails();
+    // Animate from the clicked image's actual screen position.
+    let openingFilm = false;
+    document.addEventListener('click', (event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || reduced.matches) return;
+        const link = event.target.closest('.container-menu .portfolio-ai-videos > a');
+        if (!link) return;
+        const image = link.querySelector('img');
+        if (!image) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        if (openingFilm) return;
+        openingFilm = true;
+        const rect = image.getBoundingClientRect();
+        const overlay = image.cloneNode();
+        overlay.className = 'portfolio-film-zoom';
+        overlay.setAttribute('aria-hidden', 'true');
+        Object.assign(overlay.style, {
+            left: `${rect.left}px`, top: `${rect.top}px`,
+            width: `${rect.width}px`, height: `${rect.height}px`,
+        });
+        document.body.append(overlay);
+        const animation = overlay.animate([
+            { left: `${rect.left}px`, top: `${rect.top}px`, width: `${rect.width}px`, height: `${rect.height}px` },
+            { left: '0px', top: '0px', width: `${window.innerWidth}px`, height: `${window.innerHeight}px` },
+        ], { duration: 600, easing: 'cubic-bezier(.54,.15,.15,1)', fill: 'forwards' });
+        animation.finished.then(() => window.location.assign(link.href));
+    }, true);
+    window.addEventListener('pageshow', () => {
+        openingFilm = false;
+        document.querySelectorAll('.portfolio-film-zoom').forEach(element => element.remove());
+    });
     // The reference home uses a panel-wide overlay link over miniature pages.
     // Route a click over a project card to that card's new tab before Barba handles it.
     document.addEventListener('click', (event) => {
@@ -114,6 +145,8 @@
     new MutationObserver(() => {
         const nextBusy = document.body.classList.contains('is-busy');
         if (busy && !nextBusy) {
+            restoreVideoThumbnails();
+            updateVideoTitle();
             prepareContent(true);
             applyMotionPreference();
         }
