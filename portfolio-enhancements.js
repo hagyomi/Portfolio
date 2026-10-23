@@ -1,6 +1,43 @@
 /* Local study additions: keyboard entry point and reduced-motion navigation. */
 (() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // The return transition copies the detail page into the miniature home panel.
+    // Restore image cards there so video playback state never becomes a thumbnail.
+    function restoreVideoThumbnails() {
+        document.querySelectorAll('.container-menu .portfolio-ai-videos video').forEach((video) => {
+            const src = video.querySelector('source')?.getAttribute('src');
+            const project = {
+                '/assets/portfolio/video/coffee-ad.mp4': ['coffee-ad', 'sipon', '커피 광고'],
+                '/assets/portfolio/video/pawly.mp4': ['pawly', 'pawly', 'PAWLY'],
+                '/assets/portfolio/video/saekomdalkom.mp4': ['saekomdalkom', 'saekomdalkom', '새콤달콤'],
+            }[src];
+            if (!project) return;
+            const [slug, poster, title] = project;
+            const image = document.createElement('img');
+            image.src = `/assets/portfolio/video/${poster}.png`;
+            image.alt = title;
+            image.decoding = 'async';
+            const figure = video.closest('figure');
+            if (figure) {
+                const link = document.createElement('a');
+                link.href = `/more/#${slug}`;
+                link.setAttribute('aria-label', `${title} 영상 보기`);
+                const caption = document.createElement('p');
+                caption.append(title + ' ');
+                const label = document.createElement('span');
+                label.textContent = 'AI video ↗';
+                caption.append(label);
+                link.append(image, caption);
+                video.pause();
+                figure.replaceWith(link);
+            } else {
+                video.pause();
+                video.replaceWith(image);
+            }
+        });
+    }
+    new MutationObserver(restoreVideoThumbnails).observe(document.body, { childList: true, subtree: true });
+    restoreVideoThumbnails();
     // The reference home uses a panel-wide overlay link over miniature pages.
     // Route a click over a project card to that card's new tab before Barba handles it.
     document.addEventListener('click', (event) => {
